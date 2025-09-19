@@ -3,19 +3,28 @@
 import { useEffect } from 'react';
 import { useEditor } from '../context/EditorContext';
 import { useEditorTools } from '../hooks/useEditor';
-import { Download, FileText } from 'lucide-react';
+import { Download, FileText, ExternalLink } from 'lucide-react'; // ExternalLink আইকন যোগ করা হয়েছে
+import { isInAppBrowser } from '../utils/envChecker'; // ইন-অ্যাপ ব্রাউজার চেকার ইমপোর্ট করা হয়েছে
 
 export default function Preview() {
   const { state, dispatch } = useEditor();
   const { isProcessing, exportToPDF, exportToTXT, wordCount, charCount, calculateStats } = useEditorTools();
 
   useEffect(() => {
-    // যখনই এডিটরের কন্টেন্ট পরিবর্তন হবে, তখন শব্দ এবং অক্ষর সংখ্যা গণনা করবে
     calculateStats(state.content);
   }, [state.content, calculateStats]);
 
   const handleExportPDF = async () => {
-    // state থেকে সরাসরি HTML কন্টেন্ট এবং অপশনগুলো exportToPDF ফাংশনে পাঠানো হচ্ছে
+    // PDF জেনারেট করার আগে চেক করা হচ্ছে এটি ইন-অ্যাপ ব্রাউজার কিনা
+    if (isInAppBrowser()) {
+      // যদি হয়, তাহলে ব্যবহারকারীকে একটি সতর্কবার্তা দেখানো হচ্ছে
+      alert(
+        "PDF generation is not supported in this browser.\n\nPlease open this link in your main browser (like Chrome or Safari) for the best experience."
+      );
+      return; // এবং ফাংশনের কাজ এখানেই থামিয়ে দেওয়া হচ্ছে
+    }
+
+    // যদি সাধারণ ব্রাউজার হয়, তাহলে PDF জেনারেশনের প্রক্রিয়া স্বাভাবিকভাবে চলবে
     await exportToPDF(state.content, {
       fileName: state.fileName,
       pageSize: state.pageSize,
@@ -25,12 +34,32 @@ export default function Preview() {
   };
 
   const handleExportTXT = () => {
-    // state থেকে সরাসরি HTML কন্টেন্ট এবং ফাইলের নাম পাঠানো হচ্ছে
     exportToTXT(state.content, state.fileName);
+  };
+
+  // একটি helper ফাংশন যা বর্তমান লিঙ্কটি ক্লিপবোর্ডে কপি করবে
+  const copyLinkToClipboard = () => {
+    navigator.clipboard.writeText(window.location.href);
+    alert("Link copied to clipboard! Now you can paste it in your main browser.");
   };
 
   return (
     <div className="bg-white dark:bg-slate-800/50 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 p-6 sticky top-24">
+      
+      {/* --- ইন-অ্যাপ ব্রাউজারের জন্য সতর্কবার্তা --- */}
+      {isInAppBrowser() && (
+        <div className="bg-yellow-100 dark:bg-yellow-900/50 border-l-4 border-yellow-500 text-yellow-800 dark:text-yellow-300 p-4 rounded-md mb-6" role="alert">
+          <div className="flex items-center">
+            <ExternalLink className="h-6 w-6 mr-3 flex-shrink-0" />
+            <div>
+              <p className="font-bold">Limited Experience</p>
+              <p className="text-sm">For PDF downloads, please open this site in your main browser (e.g., Chrome, Safari).</p>
+              <button onClick={copyLinkToClipboard} className="mt-2 text-sm font-semibold underline hover:text-yellow-600">Copy Link</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">Preview & Export</h3>
         <div className="text-sm text-slate-500 dark:text-slate-400">
