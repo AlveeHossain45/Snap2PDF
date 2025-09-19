@@ -37,12 +37,18 @@ export default function Preview() {
         </div>
       </div>
 
-      {/* --- মূল পরিবর্তন এখানে --- */}
+      {/* 
+        <<<<< --- মূল এবং চূড়ান্ত পরিবর্তন এখানে --- >>>>>
+        
+        নিচের className-টিকে পরিবর্তন করা হয়েছে।
+        - dark:bg-slate-700: Dark Mode-এ ব্যাকগ্রাউন্ডকে ডার্ক করবে।
+        - dark:prose-invert: Dark Mode-এ `prose`-এর ভেতরের সব লেখার রঙকে সাদা/হালকা করে দেবে।
+        
+        এখন প্রিভিউ প্যানেলটি এডিটর প্যানেলের মতোই থিম পরিবর্তন করবে।
+      */}
       <div
         ref={previewRef}
-        // dark:prose-invert ক্লাসটি সরিয়ে ফেলা হয়েছে, যা লেখাকে সাদা করছিল
-        // এবং bg-white নিশ্চিত করা হয়েছে
-        className="bg-white border rounded-lg p-6 min-h-[250px] mb-6 border-slate-300 prose max-w-none"
+        className="bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg p-6 min-h-[250px] mb-6 prose max-w-none dark:prose-invert"
         dangerouslySetInnerHTML={{ __html: state.content }}
       />
       
