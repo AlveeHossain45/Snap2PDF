@@ -1,0 +1,76 @@
+/* Extra styles for editor */
+.editor-content:focus {
+    outline: none;
+  }
+  
+  .editor-content h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0.67em 0;
+  }
+  
+  .editor-content h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0.83em 0;
+  }
+  
+  .editor-content h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+    margin: 1em 0;
+  }
+  
+  .editor-content p {
+    margin: 1em 0;
+  }
+  
+  .editor-content ul, .editor-content ol {
+    margin: 1em 0;
+    padding-left: 2em;
+  }
+  
+  .editor-content ul {
+    list-style-type: disc;
+  }
+  
+  .editor-content ol {
+    list-style-type: decimal;
+  }
+  
+  .editor-content li {
+    margin: 0.5em 0;
+  }
+  
+  .editor-content a {
+    color: #3b82f6;
+    text-decoration: underline;
+  }
+  
+  .editor-content blockquote {
+    border-left: 4px solid #e5e7eb;
+    padding-left: 1em;
+    margin: 1em 0;
+    font-style: italic;
+  }
+  
+  .editor-content code {
+    background-color: #f3f4f6;
+    padding: 0.2em 0.4em;
+    border-radius: 0.25em;
+    font-family: monospace;
+  }
+  
+  .editor-content pre {
+    background-color: #f3f4f6;
+    padding: 1em;
+    border-radius: 0.5em;
+    overflow-x: auto;
+    margin: 1em 0;
+  }
+  
+  .editor-content pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+  }

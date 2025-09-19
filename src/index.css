@@ -1,0 +1,67 @@
+/* src/index.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  /* --- সম্পূর্ণ নতুন প্রিমিয়াম বাটন --- */
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+
+  /* --- সম্পূর্ণ নতুন প্রিমিয়াম ইনপুট --- */
+  .premium-input {
+    @apply w-full px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-100 dark:bg-slate-800 dark:text-slate-200 transition-all shadow-inner;
+  }
+}
+
+/* --- Quill Editor-এর জন্য নতুন এবং উন্নত প্রিমিয়াম স্টাইল --- */
+#toolbar {
+  @apply bg-white dark:bg-slate-800 rounded-t-xl border border-slate-200 dark:border-slate-700 border-b-0 p-2 shadow-sm;
+}
+.ql-container.ql-snow {
+  @apply border border-slate-200 dark:border-slate-700 rounded-b-xl;
+  min-height: 450px;
+}
+.ql-editor {
+  @apply text-base font-normal;
+  color: #334155; /* slate-700 */
+}
+.dark .ql-editor {
+  color: #e2e8f0; /* slate-200 */
+}
+.ql-editor.ql-blank::before {
+  color: #94a3b8; /* slate-400 */
+}
+.dark .ql-editor.ql-blank::before {
+  color: #64748b; /* slate-500 */
+}
+
+/* --- টুলবারের আইকন ও ড্রপডাউনের প্রিমিয়াম স্টাইল --- */
+.ql-snow .ql-picker, .ql-snow .ql-stroke, .ql-snow .ql-fill {
+  @apply text-slate-600 dark:text-slate-300 transition-colors;
+}
+.ql-snow .ql-picker:hover, .ql-snow .ql-stroke:hover, .ql-snow .ql-fill:hover {
+  @apply text-blue-600 dark:text-blue-500;
+}
+.ql-snow .ql-active .ql-stroke, .ql-snow .ql-active .ql-picker-label {
+  @apply !text-blue-600 dark:!text-blue-500;
+  font-weight: 600;
+}
+.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+  @apply bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 shadow-lg rounded-md;
+}
+.ql-snow .ql-picker-options .ql-picker-item {
+  @apply text-slate-600 dark:text-slate-300;
+}
